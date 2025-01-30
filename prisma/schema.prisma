@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL") // Replace with your MongoDB Atlas connection string
+}
+
+model User {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  name              String    // Name of the user
+  age               Int       // Age of the user
+  country           String    // Country of the user
+  phone             String    // Phone number of the user
+  describeYourself  String    // Description of the user
+  description       String    // Expectations from Bunnie
+  subscriptionPlan  String    // Subscription plan chosen by the user
+  gender            String    // Gender of the user
+  option            String    // Companion's gender preference
+  otp               String?   // OTP (optional, used for verification)
+  createdAt         DateTime  @default(now()) // Timestamp when the user was created
+  updatedAt         DateTime  @updatedAt // Timestamp when the user was last updated
+
+  @@map("users") // Map the model to the "users" collection in MongoDB
+}
